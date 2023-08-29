@@ -2,7 +2,10 @@ import Node from "./node.js";
 
 // Tree factory
 const Tree = (array) => {
-  const root = buildTree(array);
+  // Sort the array and remove duplicates using a sorting function and the Set() object
+  const uniqSorted = [...new Set(array.sort((a, b) => a - b))];
+
+  const root = buildTree(uniqSorted);
 
   return {
     root,
@@ -10,28 +13,36 @@ const Tree = (array) => {
 };
 
 // Function for building tree
-function buildTree(array) {
+function buildTree(array, start, end) {
   /*
-    PSEUDOCODE
+  PSEUDOCODE
 
-    1. Sort array
-    2. Remove duplicates
-    3. Initialise the start, end and mid points of the array
-    4. Check base case
+  1. Sort array
+  2. Remove duplicates
+  3. Initialise the start, end and mid points of the array
+  4. Check base case
+  5. Set the root node to the mid point data of the array
+  6. Recursively construct left subtree and make it the left child of root
+  7. Recursively construct right subtree and make it the right child of root
+  8. Return root node
   */
 
-  // Sort the array and remove duplicates using a sorting function and the Set() object
-  const uniqSorted = [...new Set(array.sort((a, b) => a - b))];
+  // Check the base case
+  if (start > end) {
+    return null;
+  }
 
   // Initialise start, end and mid points of array
-  const start = 0;
-  const end = uniqSorted.length - 1;
   const mid = parseInt((start + end) / 2);
+  // Make the middle element the root node
+  const root = Node(array[mid]);
 
-  // Check the base case for recursion
-  if (uniqSorted.length === 0) {
-    return null;
-  } else if (uniqSorted.length === 1) {
-    return Node(uniqSorted[0]);
-  }
+  // Recursively construct the left subtree and make it left child of root
+  root.left = buildTree(array, start, mid - 1);
+
+  // Recursively construct the right subtree and make it left child of root
+  root.right = buildTree(array, mid + 1, end);
+
+  // Return the root
+  return root;
 }
