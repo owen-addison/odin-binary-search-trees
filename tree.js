@@ -5,7 +5,7 @@ const Tree = (array) => {
   // Sort the array and remove duplicates using a sorting function and the Set() object
   const uniqSorted = [...new Set(array.sort((a, b) => a - b))];
 
-  const root = buildTree(uniqSorted);
+  const root = buildTree(uniqSorted, 0, uniqSorted.length - 1);
 
   return {
     root,
