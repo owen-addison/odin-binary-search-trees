@@ -29,7 +29,9 @@ function buildTree(array) {
   const mid = parseInt((start + end) / 2);
 
   // Check the base case for recursion
-  if (uniqSorted.length < 2) {
+  if (uniqSorted.length === 0) {
     return null;
+  } else if (uniqSorted.length === 1) {
+    return Node(uniqSorted[0]);
   }
 }
