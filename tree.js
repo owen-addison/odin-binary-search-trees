@@ -10,4 +10,14 @@ const Tree = () => {
 };
 
 // Function for building tree
-function buildTree(arr) {}
+function buildTree(array) {
+  /*
+    PSEUDOCODE
+
+    1. Sort array
+    2. Remove duplicates
+  */
+
+  // Sort the array and remove duplicates using a sorting function and the Set() object
+  const uniqSorted = [...new Set(array.sort((a, b) => a - b))];
+}
