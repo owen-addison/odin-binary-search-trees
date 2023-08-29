@@ -1,12 +1,22 @@
 // Node factory
 const Node = (d) => {
-  const left = null;
-  const right = null;
+  let left = null;
+  let right = null;
 
   return {
     data: d,
-    left,
-    right,
+    get left() {
+      return left;
+    },
+    set left(value) {
+      left = value;
+    },
+    get right() {
+      return right;
+    },
+    set right(value) {
+      right = value;
+    },
   };
 };
 
