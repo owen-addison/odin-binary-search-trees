@@ -14,19 +14,6 @@ const Tree = (array) => {
 
 // Function for building tree
 function buildTree(array, start, end) {
-  /*
-  PSEUDOCODE
-
-  1. Sort array
-  2. Remove duplicates
-  3. Initialise the start, end and mid points of the array
-  4. Check base case
-  5. Set the root node to the mid point data of the array
-  6. Recursively construct left subtree and make it the left child of root
-  7. Recursively construct right subtree and make it the right child of root
-  8. Return root node
-  */
-
   // Check the base case
   if (start > end) {
     return null;
@@ -46,3 +33,5 @@ function buildTree(array, start, end) {
   // Return the root
   return root;
 }
+
+export default Tree;
