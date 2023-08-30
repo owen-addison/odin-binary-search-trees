@@ -85,6 +85,10 @@ const Tree = (array) => {
     delete: (data) => {
       root = deleteRec(root, data);
     },
+
+    find: (value) => {
+      findRec(root, value);
+    },
   };
 };
 
@@ -111,3 +115,15 @@ function buildTree(array, start, end) {
 }
 
 export default Tree;
+
+/*
+PSEUDOCODE
+find(value):
+  - Call recursive find function findRec(root, value)
+
+findRec(node, value)
+  - Base case: if node.data === null then return null (value not found)
+  - If node.data === value then return node (value found)
+  - If node.data > value then call findRec(node.left, value) to search left subtree
+  - If node.data < value then call findRec(node.right, value) to search right subtree
+*/
