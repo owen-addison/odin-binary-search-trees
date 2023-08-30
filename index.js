@@ -26,3 +26,7 @@ prettyPrint(newTree.root);
 newTree.delete(4);
 
 prettyPrint(newTree.root);
+
+console.log(newTree.find(67));
+
+console.log(newTree.find(4));
