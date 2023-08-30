@@ -32,6 +32,8 @@ const Tree = (array) => {
     insert: (key) => {
       root = insertRec(root, key);
     },
+
+    delete: (key) => {},
   };
 };
 
