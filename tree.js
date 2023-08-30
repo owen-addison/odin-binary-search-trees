@@ -95,6 +95,48 @@ const Tree = (array) => {
     }
   };
 
+  // Level order function for returning node data array or for applying function to nodes in array
+  const levelOrderFunc = (func = null) => {
+    // Initialise the empty array to store node values (if no function is provided)
+    let array = [];
+    // if (func === null) {
+    // }
+
+    // Initialise the queue and push the root node
+    let queue = [];
+    queue.push(root);
+
+    // While the queue is not empty
+    while (queue.length > 0) {
+      // Dequeue a node from the queue
+      let currentNode = queue.shift();
+
+      // If a function is provided
+      if (func !== null) {
+        // Apply function to the node
+        func(currentNode);
+      } else {
+        // Else, add the node's data to the results array
+        array.push(currentNode.data);
+      }
+
+      // If the node has a left child, enqueue the left child
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+
+      // If the node has a right child, enqueue the right child
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+
+    // If function was not provided, return the results array
+    if (func === null) {
+      return array;
+    }
+  };
+
   return {
     root,
 
@@ -108,6 +150,10 @@ const Tree = (array) => {
 
     find: (value) => {
       return findRec(root, value);
+    },
+
+    levelOrder: (func) => {
+      return levelOrderFunc(func);
     },
   };
 };
@@ -138,14 +184,15 @@ export default Tree;
 
 /*
 PSEUDOCODE
-levelOrder(func = null):
-  - Initialise an empty queue and push the root node onto it
-  - Initialise an empty array to store node values (if no function is provided)
+levelOrder(func):
+  - If func is not provided, initialize an empty results array.
+  - Initialize an empty queue.
+  - Enqueue the root node to the queue.
   - While the queue is not empty:
-    - Dequeue a node from the front of the queue
-    - If a function is provided, apply the function to the node
-    - Otherwise, add the node's value to the array
-    - If the node has a left child, enqueue the left child
-    - If the node has a right child, enqueue the right child
-  - If no function was provided, return the array of node values
+    - Dequeue a node from the queue.
+    - If func is provided, apply func to the node.
+    - Else, add the node's data to the results array.
+    - If the node has a left child, enqueue the left child.
+    - If the node has a right child, enqueue the right child.
+  - If func was not provided, return the results array.
 */
