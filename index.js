@@ -30,3 +30,12 @@ prettyPrint(newTree.root);
 console.log(newTree.find(67));
 
 console.log(newTree.find(4));
+
+// 1. Print each node's data using the provided function
+console.log("Level Order Traversal using provided function:");
+newTree.levelOrder((node) => console.log(node.data));
+
+// 2. Collect node data in an array
+const levelOrderArray = newTree.levelOrder();
+console.log("\nLevel Order Traversal returning an array:");
+console.log(levelOrderArray);
