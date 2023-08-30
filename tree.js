@@ -138,12 +138,14 @@ export default Tree;
 
 /*
 PSEUDOCODE
-find(value):
-  - Call recursive find function findRec(root, value)
-
-findRec(node, value)
-  - Base case: if node.data === null then return null (value not found)
-  - If node.data === value then return node (value found)
-  - If node.data > value then call findRec(node.left, value) to search left subtree
-  - If node.data < value then call findRec(node.right, value) to search right subtree
+levelOrder(func = null):
+  - Initialise an empty queue and push the root node onto it
+  - Initialise an empty array to store node values (if no function is provided)
+  - While the queue is not empty:
+    - Dequeue a node from the front of the queue
+    - If a function is provided, apply the function to the node
+    - Otherwise, add the node's value to the array
+    - If the node has a left child, enqueue the left child
+    - If the node has a right child, enqueue the right child
+  - If no function was provided, return the array of node values
 */
