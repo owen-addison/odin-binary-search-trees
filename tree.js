@@ -8,18 +8,18 @@ const Tree = (array) => {
   let root = buildTree(uniqSorted, 0, uniqSorted.length - 1);
 
   // Recursive function for inserting nodes into BST
-  const insertRec = (root, key) => {
+  const insertRec = (root, data) => {
     // If the tree is empty, return a new node
     if (root == null) {
-      root = Node(key);
+      root = Node(data);
       return root;
     }
 
     // Otherwise, recur down the tree
-    if (key < root.data) {
-      root.left = insertRec(root.left, key);
-    } else if (key > root.data) {
-      root.right = insertRec(root.right, key);
+    if (data < root.data) {
+      root.left = insertRec(root.left, data);
+    } else if (data > root.data) {
+      root.right = insertRec(root.right, data);
     }
 
     // Return the (unchanged) node pointer
@@ -29,11 +29,11 @@ const Tree = (array) => {
   return {
     root,
 
-    insert: (key) => {
-      root = insertRec(root, key);
+    insert: (data) => {
+      root = insertRec(root, data);
     },
 
-    delete: (key) => {},
+    delete: (data) => {},
   };
 };
 
