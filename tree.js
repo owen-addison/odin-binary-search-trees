@@ -5,10 +5,33 @@ const Tree = (array) => {
   // Sort the array and remove duplicates using a sorting function and the Set() object
   const uniqSorted = [...new Set(array.sort((a, b) => a - b))];
 
-  const root = buildTree(uniqSorted, 0, uniqSorted.length - 1);
+  let root = buildTree(uniqSorted, 0, uniqSorted.length - 1);
+
+  // Recursive function for inserting nodes into BST
+  const insertRec = (root, key) => {
+    // If the tree is empty, return a new node
+    if (root == null) {
+      root = Node(key);
+      return root;
+    }
+
+    // Otherwise, recur down the tree
+    if (key < root.data) {
+      root.left = insertRec(root.left, key);
+    } else if (key > root.data) {
+      root.right = insertRec(root.right, key);
+    }
+
+    // Return the (unchanged) node pointer
+    return root;
+  };
 
   return {
     root,
+
+    insert: (key) => {
+      root = insertRec(root, key);
+    },
   };
 };
 
