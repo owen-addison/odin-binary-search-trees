@@ -10,7 +10,7 @@ const Tree = (array) => {
   // Recursive function for inserting nodes into BST
   const insertRec = (root, data) => {
     // If the tree is empty, return a new node
-    if (root == null) {
+    if (root === null) {
       root = Node(data);
       return root;
     }
@@ -26,6 +26,55 @@ const Tree = (array) => {
     return root;
   };
 
+  // Recursive function for deleting nodes in BST
+  const deleteRec = (root, data) => {
+    // Base case
+    if (root === null) {
+      return root;
+    }
+
+    // Recursive calls for ancestors of node to be deleted
+    if (root.data > data) {
+      root.left = deleteRec(root.left, data);
+      return root;
+    } else if (root.data < data) {
+      root.right = deleteRec(root.right, data);
+      return root;
+    }
+
+    // If one of the children is empty
+    if (root.left === null) {
+      return root.right;
+    } else if (root.right === null) {
+      return root.left;
+    }
+
+    // If both children exist
+    else {
+      let succParent = root;
+
+      // Find successor
+      let succ = root.right;
+      while (succ.left !== null) {
+        succParent = succ;
+        succ = succ.left;
+      }
+
+      // Delete successor
+      if (succParent !== root) {
+        succParent.left = succ.right;
+      } else {
+        succParent.right = succ.right;
+      }
+
+      // Copy successor data to root
+      root.data = succ.data;
+
+      // Return the root
+      return root;
+    }
+  };
+
   return {
     root,
 
@@ -33,7 +82,9 @@ const Tree = (array) => {
       root = insertRec(root, data);
     },
 
-    delete: (data) => {},
+    delete: (data) => {
+      root = deleteRec(root, data);
+    },
   };
 };
 
