@@ -75,6 +75,26 @@ const Tree = (array) => {
     }
   };
 
+  // Recursive find function
+  const findRec = (node, value) => {
+    // Base case
+    if (!node) {
+      return null;
+    }
+
+    // If value found
+    if (node.data === value) {
+      return node;
+    }
+
+    // Recursively search the BST to find value
+    if (node.data > value) {
+      return findRec(node.left, value);
+    } else if (node.data < value) {
+      return findRec(node.right, value);
+    }
+  };
+
   return {
     root,
 
@@ -87,7 +107,7 @@ const Tree = (array) => {
     },
 
     find: (value) => {
-      findRec(root, value);
+      return findRec(root, value);
     },
   };
 };
