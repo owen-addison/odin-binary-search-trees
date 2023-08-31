@@ -313,6 +313,25 @@ const Tree = (array) => {
     }
   };
 
+  // Function for checking whether a tree is balanced
+  const isBalanced = (node = root) => {
+    if (!node) {
+      return true;
+    }
+
+    // Get the height of left and right subtrees using heightRec
+    const leftHeight = heightRec(node.left);
+    const rightHeight = heightRec(node.right);
+
+    // Check the height difference
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return false;
+    }
+
+    // Recursively check for all nodes
+    return isBalanced(node.left) && isBalanced(node.right);
+  };
+
   return {
     root,
 
@@ -349,6 +368,8 @@ const Tree = (array) => {
     },
 
     depth,
+
+    isBalanced,
   };
 };
 
