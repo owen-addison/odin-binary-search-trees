@@ -338,7 +338,10 @@ const Tree = (array) => {
     const sortedArray = inOrderIt();
 
     // Step 2: Rebuild the tree using the buildTree function
-    root = buildTree(sortedArray, 0, sortedArray.length - 1);
+    const newRoot = buildTree(sortedArray, 0, sortedArray.length - 1);
+
+    // Return a new tree with the newRoot
+    return Tree(sortedArray); // This will create a new tree with the balanced root
   };
 
   return {
