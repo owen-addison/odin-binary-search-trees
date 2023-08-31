@@ -73,9 +73,18 @@ newTree.postOrder((node) => console.log(node.data)); // Expected: [left-most lea
 const nodeHeight = newTree.height(newTree.root.right);
 console.log("Height of the node:", nodeHeight); // Expected: height of the given node (2)
 
+// Testing the height function using value
 const valueHeight = newTree.height(9);
 console.log("Height of the node with value", 9, "is:", valueHeight); // Expected: height of the node with the given value (1)
 
 // Testing the height function to return full tree height
 const treeHeight = newTree.height(newTree.root);
 console.log("Height of the tree:", treeHeight); // Expected: height of the tree (3)
+
+// Testing the depth function using node input
+const nodeDepth = newTree.depth(newTree.root.right);
+console.log("Depth of the node:", nodeDepth); // Expected: depth of the given node (1)
+
+// Testing the depth function using value
+const valueDepth = newTree.depth(9);
+console.log("Depth of the node with value", 9, "is:", valueDepth); // Expected: depth of the node with the given value (2)
