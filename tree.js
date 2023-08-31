@@ -247,6 +247,21 @@ const Tree = (array) => {
     }
   };
 
+  // Recursive function to calculate the height of a node
+  const heightRec = (node) => {
+    // Base case: If the node is null, return -1
+    if (node === null) {
+      return -1;
+    }
+
+    // Recursively calculate the height of the left and right subtrees
+    const leftHeight = heightRec(node.left);
+    const rightHeight = heightRec(node.right);
+
+    // Return the maximum of the two heights, plus 1 for the current edge
+    return Math.max(leftHeight, rightHeight) + 1;
+  };
+
   return {
     root,
 
@@ -276,6 +291,10 @@ const Tree = (array) => {
 
     postOrder: (func) => {
       return postOrderIt(func);
+    },
+
+    height: (node) => {
+      return heightRec(node);
     },
   };
 };
