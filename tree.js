@@ -181,6 +181,37 @@ const Tree = (array) => {
     }
   };
 
+  // In order tree traversal function using an iterative approach
+  const inOrderIt = (func = null) => {
+    let result = [];
+    let stack = [];
+    let currentNode = root;
+
+    while (currentNode !== null || stack.length > 0) {
+      // Reach the left most Node of the current Node
+      while (currentNode !== null) {
+        stack.push(currentNode);
+        currentNode = currentNode.left;
+      }
+
+      // Current must be NULL at this point
+      currentNode = stack.pop();
+
+      if (func !== null) {
+        func(currentNode);
+      } else {
+        result.push(currentNode.data);
+      }
+
+      // Now visit the right subtree
+      currentNode = currentNode.right;
+    }
+
+    if (func === null) {
+      return result;
+    }
+  };
+
   return {
     root,
 
@@ -202,6 +233,10 @@ const Tree = (array) => {
 
     preOrder: (func) => {
       return preOrderIt(func);
+    },
+
+    inOrder: (func) => {
+      return inOrderIt(func);
     },
   };
 };
