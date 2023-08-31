@@ -95,8 +95,8 @@ const Tree = (array) => {
     }
   };
 
-  // Level order function for returning node data array or for applying function to nodes in array
-  const levelOrderFunc = (func = null) => {
+  // Level order iterative function
+  const levelOrderIt = (func = null) => {
     // Initialise the empty array to store node values (if no function is provided)
     let array = [];
     // if (func === null) {
@@ -111,9 +111,10 @@ const Tree = (array) => {
       // Dequeue a node from the queue
       let currentNode = queue.shift();
 
-      // If a function is provided
+      // Carry out the appropriate logic depending on whether a function is to used
+      // or the data is to be added to the array
       if (func !== null) {
-        // Apply function to the node
+        // If a function is provided apply function to the node
         func(currentNode);
       } else {
         // Else, add the node's data to the results array
@@ -153,7 +154,7 @@ const Tree = (array) => {
     },
 
     levelOrder: (func) => {
-      return levelOrderFunc(func);
+      return levelOrderIt(func);
     },
   };
 };
@@ -185,8 +186,8 @@ export default Tree;
 /*
 PSEUDOCODE
 levelOrder(func):
-  - If func is not provided, initialize an empty results array.
-  - Initialize an empty queue.
+  - If func is not provided, initialise an empty results array.
+  - Initialise an empty queue.
   - Enqueue the root node to the queue.
   - While the queue is not empty:
     - Dequeue a node from the queue.
@@ -195,4 +196,23 @@ levelOrder(func):
     - If the node has a left child, enqueue the left child.
     - If the node has a right child, enqueue the right child.
   - If func was not provided, return the results array.
+
+preOrder -> <root><left><right>
+inOrder -> <left><root><right>
+postOrder -> <left><right><root>
+
+preOrder(func):
+  - Call preOrderIt(func) and return the result.
+
+preOrderIt(func):
+  - If root is null, return an empty array.
+  - Initialize an empty stack and push the root onto the stack.
+  - Initialize an empty array called result.
+  - While the stack is not empty:
+    - Pop a node from the stack.
+    - If func is provided, apply func to the node.
+    - Else, add the node's data to the result array.
+    - If node has a right child, push it onto the stack.
+    - If node has a left child, push it onto the stack.
+  - Return the result array.
 */
