@@ -95,12 +95,10 @@ const Tree = (array) => {
     }
   };
 
-  // Level order iterative function
+  // Level order tree traversal function using an iterative approach
   const levelOrderIt = (func = null) => {
     // Initialise the empty array to store node values (if no function is provided)
-    let array = [];
-    // if (func === null) {
-    // }
+    let result = [];
 
     // Initialise the queue and push the root node
     let queue = [];
@@ -118,7 +116,7 @@ const Tree = (array) => {
         func(currentNode);
       } else {
         // Else, add the node's data to the results array
-        array.push(currentNode.data);
+        result.push(currentNode.data);
       }
 
       // If the node has a left child, enqueue the left child
@@ -134,7 +132,52 @@ const Tree = (array) => {
 
     // If function was not provided, return the results array
     if (func === null) {
-      return array;
+      return result;
+    }
+  };
+
+  // Pre order tree traversal function using an iterative approach
+  const preOrderIt = (func = null) => {
+    // If root is null return an empty array
+    if (root === null) {
+      return [];
+    }
+
+    // Initialise an empty stack and push the root onto the stack
+    let stack = [];
+    stack.push(root);
+
+    // Initialise the empty array to store node values (if no function is provided)
+    let result = [];
+
+    while (stack.length > 0) {
+      // Pop a node from the stack
+      let currentNode = stack.pop();
+
+      // Carry out the appropriate logic depending on whether a function is to used
+      // or the data is to be added to the array
+      if (func !== null) {
+        // If a function is provided apply function to the node
+        func(currentNode);
+      } else {
+        // Else, add the node's data to the results array
+        result.push(currentNode.data);
+      }
+
+      // If the node has a right child, push it onto the stack
+      if (currentNode.right !== null) {
+        stack.push(currentNode.right);
+      }
+
+      // If the node has a left child, push it onto the stack
+      if (currentNode.left !== null) {
+        stack.push(currentNode.left);
+      }
+    }
+
+    // If function was not provided, return the results array
+    if (func === null) {
+      return result;
     }
   };
 
@@ -155,6 +198,10 @@ const Tree = (array) => {
 
     levelOrder: (func) => {
       return levelOrderIt(func);
+    },
+
+    preOrder: (func) => {
+      return preOrderIt(func);
     },
   };
 };
