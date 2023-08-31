@@ -332,6 +332,15 @@ const Tree = (array) => {
     return isBalanced(node.left) && isBalanced(node.right);
   };
 
+  // Rebalance the tree
+  const rebalance = () => {
+    // Step 1: Get a sorted array of the tree's elements using in-order traversal
+    const sortedArray = inOrderIt();
+
+    // Step 2: Rebuild the tree using the buildTree function
+    root = buildTree(sortedArray, 0, sortedArray.length - 1);
+  };
+
   return {
     root,
 
@@ -370,6 +379,8 @@ const Tree = (array) => {
     depth,
 
     isBalanced,
+
+    rebalance,
   };
 };
 
