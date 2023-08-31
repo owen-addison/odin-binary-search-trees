@@ -39,3 +39,43 @@ newTree.levelOrder((node) => console.log(node.data));
 const levelOrderArray = newTree.levelOrder();
 console.log("\nLevel Order Traversal returning an array:");
 console.log(levelOrderArray);
+
+// ... [Your existing code in index.js]
+
+// Testing preOrder traversal
+console.log("PreOrder Traversal:");
+const preOrderResult = newTree.preOrder();
+console.log(preOrderResult); // Expected: [root, left, ..., right, ...]
+
+// Testing inOrder traversal
+console.log("\nInOrder Traversal:");
+const inOrderResult = newTree.inOrder();
+console.log(inOrderResult); // Expected: [left-most leaf, ..., root, ..., right-most leaf]
+
+// Testing postOrder traversal
+console.log("\nPostOrder Traversal:");
+const postOrderResult = newTree.postOrder();
+console.log(postOrderResult); // Expected: [left-most leaf, ..., right-most leaf, ..., root]
+
+// Testing preOrder traversal with a function
+console.log("\nPreOrder Traversal with function:");
+newTree.preOrder((node) => console.log(node.data)); // Expected: [root, left, ..., right, ...]
+
+// Testing inOrder traversal with a function
+console.log("\nInOrder Traversal with function:");
+newTree.inOrder((node) => console.log(node.data)); // Expected: [left-most leaf, ..., root, ..., right-most leaf]
+
+// Testing postOrder traversal with a function
+console.log("\nPostOrder Traversal with function:");
+newTree.postOrder((node) => console.log(node.data)); // Expected: [left-most leaf, ..., right-most leaf, ..., root]
+
+// Testing the height function using node input
+const nodeHeight = newTree.height(newTree.root.right);
+console.log("Height of the node:", nodeHeight); // Expected: height of the given node (2)
+
+const valueHeight = newTree.height(9);
+console.log("Height of the node with value", 9, "is:", valueHeight); // Expected: height of the node with the given value (1)
+
+// Testing the height function to return full tree height
+const treeHeight = newTree.height(newTree.root);
+console.log("Height of the tree:", treeHeight); // Expected: height of the tree (3)
