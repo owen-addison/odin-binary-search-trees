@@ -248,7 +248,16 @@ const Tree = (array) => {
   };
 
   // Recursive function to calculate the height of a node
-  const heightRec = (node) => {
+  const heightRec = (input) => {
+    let node;
+
+    // Check if the input is a node object or a value
+    if (typeof input === "object" && input !== null) {
+      node = input;
+    } else {
+      node = findRec(root, input); // Assuming findRec is the recursive find function you've defined
+    }
+
     // Base case: If the node is null, return -1
     if (node === null) {
       return -1;
@@ -293,8 +302,8 @@ const Tree = (array) => {
       return postOrderIt(func);
     },
 
-    height: (node) => {
-      return heightRec(node);
+    height: (input) => {
+      return heightRec(input);
     },
   };
 };
