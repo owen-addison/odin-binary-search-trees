@@ -100,3 +100,8 @@ newTree.insert(7400);
 // Test the isBalanced function
 const balanced = newTree.isBalanced();
 console.log("Is the tree balanced?", balanced); // Expected: false
+
+// Test the rebalance function
+const balancedTree = newTree.rebalance();
+console.log("Is the rebalanced tree balanced?", balancedTree.isBalanced()); // Expected: true
+prettyPrint(balancedTree.root);
