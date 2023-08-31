@@ -271,6 +271,48 @@ const Tree = (array) => {
     return Math.max(leftHeight, rightHeight) + 1;
   };
 
+  const depth = (input) => {
+    let node;
+
+    // Check if the input is a node object or a value
+    if (typeof input === "object" && input !== null) {
+      node = input;
+    } else {
+      node = findRec(root, input); // Assuming findRec is the recursive find function you've defined
+    }
+
+    let depth = 0;
+    let currentNode = node;
+
+    // Traverse up to the root from the given node
+    while (currentNode !== root && currentNode !== null) {
+      depth++;
+      currentNode = findParent(root, currentNode.data); // You'll need a function to find the parent of a given node
+    }
+
+    return depth;
+  };
+
+  // Helper function to find the parent of a given node
+  const findParent = (currentNode, value) => {
+    if (!currentNode) {
+      return null;
+    }
+
+    if (
+      (currentNode.left && currentNode.left.data === value) ||
+      (currentNode.right && currentNode.right.data === value)
+    ) {
+      return currentNode;
+    }
+
+    if (currentNode.data > value) {
+      return findParent(currentNode.left, value);
+    } else {
+      return findParent(currentNode.right, value);
+    }
+  };
+
   return {
     root,
 
@@ -305,6 +347,8 @@ const Tree = (array) => {
     height: (input) => {
       return heightRec(input);
     },
+
+    depth,
   };
 };
 
