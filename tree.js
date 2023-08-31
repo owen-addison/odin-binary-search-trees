@@ -212,6 +212,41 @@ const Tree = (array) => {
     }
   };
 
+  // Post order tree traversal function using an iterative approach
+  const postOrderIt = (func = null) => {
+    let result = [];
+    let stack1 = [];
+    let stack2 = [];
+    stack1.push(root);
+
+    while (stack1.length > 0) {
+      let currentNode = stack1.pop();
+      stack2.push(currentNode);
+
+      if (currentNode.left !== null) {
+        stack1.push(currentNode.left);
+      }
+
+      if (currentNode.right !== null) {
+        stack1.push(currentNode.right);
+      }
+    }
+
+    while (stack2.length > 0) {
+      let currentNode = stack2.pop();
+
+      if (func !== null) {
+        func(currentNode);
+      } else {
+        result.push(currentNode.data);
+      }
+    }
+
+    if (func === null) {
+      return result;
+    }
+  };
+
   return {
     root,
 
@@ -237,6 +272,10 @@ const Tree = (array) => {
 
     inOrder: (func) => {
       return inOrderIt(func);
+    },
+
+    postOrder: (func) => {
+      return postOrderIt(func);
     },
   };
 };
@@ -264,37 +303,3 @@ function buildTree(array, start, end) {
 }
 
 export default Tree;
-
-/*
-PSEUDOCODE
-levelOrder(func):
-  - If func is not provided, initialise an empty results array.
-  - Initialise an empty queue.
-  - Enqueue the root node to the queue.
-  - While the queue is not empty:
-    - Dequeue a node from the queue.
-    - If func is provided, apply func to the node.
-    - Else, add the node's data to the results array.
-    - If the node has a left child, enqueue the left child.
-    - If the node has a right child, enqueue the right child.
-  - If func was not provided, return the results array.
-
-preOrder -> <root><left><right>
-inOrder -> <left><root><right>
-postOrder -> <left><right><root>
-
-preOrder(func):
-  - Call preOrderIt(func) and return the result.
-
-preOrderIt(func):
-  - If root is null, return an empty array.
-  - Initialize an empty stack and push the root onto the stack.
-  - Initialize an empty array called result.
-  - While the stack is not empty:
-    - Pop a node from the stack.
-    - If func is provided, apply func to the node.
-    - Else, add the node's data to the result array.
-    - If node has a right child, push it onto the stack.
-    - If node has a left child, push it onto the stack.
-  - Return the result array.
-*/
