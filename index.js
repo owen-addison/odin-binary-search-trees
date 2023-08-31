@@ -88,3 +88,15 @@ console.log("Depth of the node:", nodeDepth); // Expected: depth of the given no
 // Testing the depth function using value
 const valueDepth = newTree.depth(9);
 console.log("Depth of the node with value", 9, "is:", valueDepth); // Expected: depth of the node with the given value (2)
+
+newTree.insert(6500);
+newTree.insert(6800);
+newTree.insert(6900);
+newTree.insert(7000);
+newTree.insert(7100);
+newTree.insert(7300);
+newTree.insert(7400);
+
+// Test the isBalanced function
+const balanced = newTree.isBalanced();
+console.log("Is the tree balanced?", balanced); // Expected: false
